@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <title>
+      {% if title %}
+        KnowledgeHub - {{ title }}
+      {% else %}
+        KnowledgeHub
+      {% endif %}
+    </title>
+
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}" />
+  </head>
+
+  <body>
+    <div class="container">
+      <aside class="sidebar">
+        <h1>KnowledgeHub</h1>
+
+        <nav>
+          <a href="/" class="{% if active_page == 'dashboard' %}active{% endif %}">Dashboard</a>
+
+          <a href="/notes/" class="{% if active_page == 'notes' %}active{% endif %}">Notes</a>
+
+          <a href="/tags/" class="{% if active_page == 'tags' %}active{% endif %}">Tags</a>
+
+          <a href="/resources/" class="{% if active_page == 'resources' %}active{% endif %}">Resources</a>
+
+          <a href="/progress/" class="{% if active_page == 'progress' %}active{% endif %}">Progress</a>
+        </nav>
+      </aside>
+
+      <header class="navbar">
+        <input type="text" placeholder="Search notes..." />
+      </header>
+
+      <section class="content">
+        {% block content %}
+
+        {% endblock %}
+      </section>
+    </div>
+  </body>
+</html>

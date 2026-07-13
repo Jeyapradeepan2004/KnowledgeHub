@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #111827;
+    color: #f9fafb;
+    font-family: Inter, sans-serif;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    grid-template-rows: 70px 1fr;
+    grid-template-areas:
+        "sidebar navbar"
+        "sidebar content";
+    height: 100vh;
+}
+
+/* .main-content{
+    display:grid;
+
+    grid-template-rows:70px 1fr;
+
+    height:100vh;
+} */
+
+.sidebar {
+    grid-area: sidebar;
+    padding: 30px;
+    overflow-y: auto;
+    background:#1e293b;
+    border-right:1px solid rgba(255,255,255,.08);
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 30px;
+}
+
+.sidebar h1{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:2rem;
+    font-weight:700;
+}
+
+.sidebar nav a {
+    color: #d1d5db;
+    text-decoration: none;
+    transition: background .2s, transform .2s;
+    display: flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 16px;
+    border-radius: 10px;
+}
+
+.sidebar nav a:hover {
+    background: #374151;
+    color: white;
+}
+
+.sidebar nav a.active {
+    background: #374151;
+    color: white;
+    font-weight: 600;
+}
+
+.navbar {
+    grid-area: navbar;
+    display: flex;
+    align-items: center;
+    padding: 0 40px;
+    background: #111827;
+    border-bottom: 1px solid #374151;
+}
+
+.navbar input {
+    width: 360px;
+    height: 44px;
+    font-size: 15px;
+    padding: 12px 16px;
+    transition:.2s;
+    border:1px solid transparent;
+    border-radius: 8px;
+    background: #1f2937;
+    color: white;
+    outline: none;
+}
+
+.navbar input:focus{
+    border-color:#60a5fa;
+    background:#243244;
+}
+
+.content {
+    max-width: 1400px;
+    width: 100%;
+    grid-area: content;
+    background: #111827;
+    padding: 60px 70px;
+}
+
+.content h1 {
+    font-size: 50px;
+    font-weight: 700;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+    line-height: 1.1;
+    font-weight: 700;
+}
+
+
+
+
+
+.navbar input::placeholder {
+    color: #9ca3af;
+}
