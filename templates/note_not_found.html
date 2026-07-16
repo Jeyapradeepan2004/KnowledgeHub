@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block styles %}
+<link rel="stylesheet"
+      href="{{ url_for('static', path='/css/not_found.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="not-found">
+
+    <h1>{{ status_code }}</h1>
+
+    <h2>{{ message }}</h2>
+
+    <div class="actions">
+        <a href="/notes" class="primary-btn">
+            ← Back to Notes
+        </a>
+    </div>
+
+</div>
+
+{% endblock %}

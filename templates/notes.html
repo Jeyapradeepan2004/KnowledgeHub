@@ -1,8 +1,26 @@
 {% extends 'layout.html' %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{{ url_for('static', path='/css/notes.css') }}" />
+{% endblock %}
+
 {% block content %}
-  <h1>Notes</h1>
-  {% for note in notes %}
-    <h1>{{ note.note_title }}</h1>
-    <p>{{ note.note_content }}</p>
-  {% endfor %}
+  <h1>My Notes</h1>
+
+  <div class="notes-grid">
+    {% for note in notes %}
+      <div class="note-card">
+        <div class="card-header">
+          <span>{{ note.date_created }}</span>
+          <span class="tag">{{ note.category }}</span>
+        </div>
+
+        <h2>{{ note.title }}</h2>
+
+        <p>{{ note.content[:120] }}...</p>
+
+        <a href="/notes/{{ note.note_id }}">View Note →</a>
+      </div>
+    {% endfor %}
+  </div>
 {% endblock %}
