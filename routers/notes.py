@@ -3,6 +3,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from fastapi.templating import Jinja2Templates
 from starlette.exceptions import HTTPException as starlettHTTPException
+from schemas import NoteResponse, CreateNote
 
 router = APIRouter()
 
@@ -10,7 +11,7 @@ templates = Jinja2Templates(directory="templates")
 
 notes: list[dict] = [
     {
-        "note_id": 1,
+        "id": 1,
         "title": "What is Flask",
         "content": "Flask is a python framework used to \
 create web application and it a lightwight \
@@ -20,7 +21,7 @@ when want the full control of the web application",
         "date_created": "01-01-2026",
     },
     {
-        "note_id": 2,
+        "id": 2,
         "title": "What is FastAPI",
         "content": "FastAPI is a modren python framework used to build web application \
 it is fastest and has good in-build things like pydantic, swegger and much more",
@@ -43,7 +44,7 @@ def view_notes(request: Request):
 def get_note(request: Request, note_id: int):
 
     for note in notes:
-        if note.get("note_id") == note_id:
+        if note.get("id") == note_id:
             return templates.TemplateResponse(
                 request,
                 "note.html",
@@ -62,9 +63,21 @@ def get_note(request: Request, note_id: int):
     
 
 
-@router.post("/")
-def create_notes():
-    return "Note Successfully Added"
+@router.post("/", response_model= NoteResponse, status_code= status.HTTP_201_CREATED)
+def create_notes(note: CreateNote):
+    
+    new_id = max(n["id"] for n in notes) + 1 if notes else 1
+    new_note = {
+        "id": new_id,
+        "title": note.title,
+        "content": note.content,
+        "category": note.category,
+        "date_created": "03-01-2026"
+    }
+    
+    notes.append(new_note)
+    return new_note
+    
 
 
 @router.put("/{note_id}")
